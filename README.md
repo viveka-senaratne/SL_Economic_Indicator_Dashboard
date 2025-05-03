@@ -1,4 +1,5 @@
 # Economic Indicators Dashboard
+App link - https://sleconomicindicatordashboard-eh9trmviu6xg2wfmbfbbn7.streamlit.app/
 
 This is a Streamlit dashboard that visualizes economic data such as GDP, inflation, and exports.
 
