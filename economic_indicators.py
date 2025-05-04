@@ -39,7 +39,7 @@ st.markdown("""
 # --------------------
 # Title and Filters
 # --------------------
-st.title("📊 Sri Lanka Economic Indicator Dashboard📊")
+st.title("Sri Lanka Economic Indicator Dashboard")
 st.markdown("Explore trends in GDP, inflation, exports, and more from the past two decades using interactive visuals.")
 
 # Sidebar filters
@@ -65,9 +65,9 @@ filtered_df = df[
 pivot_df = filtered_df.pivot_table(index="Year", columns="Indicator", values="Value").fillna(0)
 
 # --------------------
-# 📦 Key Insight Boxes
+# Key Insight Boxes
 # --------------------
-st.subheader("📌 Key Economic Insights")
+st.subheader("Key Economic Insights")
 
 avg_by_year = pivot_df.mean(axis=1)
 best_year = avg_by_year.idxmax()
@@ -75,14 +75,14 @@ top_indicator = pivot_df.mean().idxmax()
 overall_mean = pivot_df.values.mean()
 
 col1, col2, col3 = st.columns(3)
-col1.markdown(f'<div class="info-box">📅 Best Performing Year:<br><span>{best_year}</span></div>', unsafe_allow_html=True)
-col2.markdown(f'<div class="info-box">🏆 Most Influential Indicator:<br><span>{top_indicator}</span></div>', unsafe_allow_html=True)
-col3.markdown(f'<div class="info-box">📈 Overall Mean Value:<br><span>{overall_mean:.2f}</span></div>', unsafe_allow_html=True)
+col1.markdown(f'<div class="info-box">Best Performing Year:<br><span>{best_year}</span></div>', unsafe_allow_html=True)
+col2.markdown(f'<div class="info-box">Most Influential Indicator:<br><span>{top_indicator}</span></div>', unsafe_allow_html=True)
+col3.markdown(f'<div class="info-box">Overall Mean Value:<br><span>{overall_mean:.2f}</span></div>', unsafe_allow_html=True)
 
 # --------------------
 # Dynamic Charts
 # --------------------
-st.subheader("🔵 Line Chart: Indicator Trends Over Time")
+st.subheader("Line Chart: Indicator Trends Over Time")
 line_chart = alt.Chart(filtered_df).mark_line(strokeWidth=3).encode(
     x=alt.X("Year:O", title="Year"),
     y=alt.Y("Value:Q", title="Value"),
@@ -94,7 +94,7 @@ st.altair_chart(line_chart, use_container_width=True)
 # --------------------
 #  Stacked Bar Chart (Stacked for the selected indicators)
 # --------------------
-st.subheader("🔵 Stacked Bar Chart: Indicator Distribution by Year")
+st.subheader("Stacked Bar Chart: Indicator Distribution by Year")
 stacked_chart = alt.Chart(filtered_df).mark_bar().encode(
     x=alt.X("Year:O", title="Year"),
     y=alt.Y("Value:Q", stack="normalize", title="Proportion"),
@@ -106,7 +106,7 @@ st.altair_chart(stacked_chart, use_container_width=True)
 # --------------------
 # Scatter Plot with Detailed Tooltip
 # --------------------
-st.subheader("🔵 Scatter Plot: Indicator Values Across Time")
+st.subheader("Scatter Plot: Indicator Values Across Time")
 scatter_plot = alt.Chart(filtered_df).mark_circle(size=80, opacity=0.7).encode(
     x=alt.X("Year:O"),
     y=alt.Y("Value:Q"),
@@ -122,7 +122,7 @@ st.altair_chart(scatter_plot, use_container_width=True)
 # --------------------
 #  Heatmap: Correlation of Economic Indicators over Time
 # --------------------
-st.subheader("🔵 Heatmap: Correlation of Economic Indicators Over Time")
+st.subheader("Heatmap: Correlation of Economic Indicators Over Time")
 heatmap = alt.Chart(filtered_df).mark_rect().encode(
     x=alt.X("Year:O", title="Year"),
     y=alt.Y("Indicator:N", title="Indicator"),
@@ -132,8 +132,8 @@ heatmap = alt.Chart(filtered_df).mark_rect().encode(
 st.altair_chart(heatmap, use_container_width=True)
 
 # --------------------
-# 📋 Summary Table
+# Summary Table
 # --------------------
-st.subheader("📋 Indicator Summary Statistics")
+st.subheader("Indicator Summary Statistics")
 summary = filtered_df.groupby("Indicator")["Value"].agg(['mean', 'min', 'max']).round(2)
 st.dataframe(summary)
